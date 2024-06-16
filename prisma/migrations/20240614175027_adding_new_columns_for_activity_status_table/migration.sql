@@ -1,0 +1,9 @@
+-- AlterTable
+ALTER TABLE "activityStatus" ADD COLUMN     "inProgressProjects" INTEGER NOT NULL DEFAULT 0,
+ADD COLUMN     "inProgressTasks" INTEGER NOT NULL DEFAULT 0,
+ADD COLUMN     "overdueProjects" INTEGER NOT NULL DEFAULT 0,
+ADD COLUMN     "overdueTasks" INTEGER NOT NULL DEFAULT 0,
+ALTER COLUMN "projects" SET DEFAULT 0,
+ALTER COLUMN "completedProjects" SET DEFAULT 0,
+ALTER COLUMN "tasks" SET DEFAULT 0,
+ALTER COLUMN "completedTasks" SET DEFAULT 0;
