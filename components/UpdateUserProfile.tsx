@@ -71,7 +71,15 @@ function UpdateUserProfile({ userInfo }) {
           overflow: 'auto',
         }}
       >
-        <Typography variant="h5" component="h1" style={{ marginTop: '0.1rem', margin: 'auto', fontWeight: 'bold' }}>
+        <Typography
+          variant="h5"
+          component="h1"
+          style={{
+            marginTop: '0.1rem',
+            margin: 'auto',
+            fontWeight: 'bold'
+          }}
+        >
           Your account info
         </Typography>
         {renderUserInfo()}
@@ -79,7 +87,7 @@ function UpdateUserProfile({ userInfo }) {
           variant="contained"
           component="label"
           style={{ textTransform: 'none' }}
-          onClick={handleOpenModal} // Deschide modalul la click pe buton
+          onClick={handleOpenModal}
         >
           <EditIcon style={{ marginRight: '0.3rem' }} />
           Edit your account info

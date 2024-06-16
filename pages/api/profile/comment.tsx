@@ -101,7 +101,9 @@ const updateComment = async (req: NextApiRequest, res: NextApiResponse) => {
   })
 
   if (!existingComment) {
-    return res.status(400).json({ error: 'Comment not found or you are not authorized to update this comment' })
+    return res.status(400).json({
+      error: 'Comment not found or you are not authorized to update this comment'
+    })
   }
 
   const updateData = {
@@ -140,7 +142,9 @@ const deleteComment = async (req: NextApiRequest, res: NextApiResponse) => {
   })
 
   if (!existingComment) {
-    return res.status(400).json({ error: 'Comment not found or you are not authorized to delete this comment' })
+    return res.status(400).json({
+      error: 'Comment not found or you are not authorized to delete this comment'
+    })
   }
 
   try {

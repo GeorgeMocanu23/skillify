@@ -1,6 +1,13 @@
 ﻿import React, { useState } from 'react'
 import { useRouter } from 'next/router'
-import { Typography, Card, Button, useMediaQuery, styled, Avatar } from '@mui/material'
+import {
+  Typography,
+  Card,
+  Button,
+  useMediaQuery,
+  styled,
+  Avatar
+} from '@mui/material'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import {signOut} from 'next-auth/react'
 
@@ -73,7 +80,12 @@ function UserProfile() {
         <Avatar
           src={user.avatar}
           alt="avatar"
-          style={{ width: '155px', height: '155px', margin: '5px', borderRadius: '8px' }}
+          style={{
+            width: '155px',
+            height: '155px',
+            margin: '5px',
+            borderRadius: '8px'
+          }}
         />
         <Button
           component="label"
@@ -82,7 +94,11 @@ function UserProfile() {
           style={{ textTransform: 'none' }}
         >
           Change avatar
-          <VisuallyHiddenInput type="file" accept="image/*" onChange={handleFileChange} />
+          <VisuallyHiddenInput
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+          />
         </Button>
         <Button
           variant="outlined"
@@ -91,7 +107,15 @@ function UserProfile() {
         >
           Edit profile
         </Button>
-        <Button variant="contained" color="error" onClick={() => signOut()} style={{ textTransform: 'none', marginTop: '10px' }}>
+        <Button
+          variant="contained"
+          color="error"
+          onClick={() => signOut()}
+          style={{
+            textTransform: 'none',
+            marginTop: '10px'
+          }}
+        >
           Logout
         </Button>
       </Card>

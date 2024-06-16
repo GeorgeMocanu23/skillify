@@ -1,5 +1,12 @@
-import React, { useState } from 'react'
-import { Card, CardContent, Typography, Divider, Button, Paper } from '@mui/material'
+import React from 'react'
+import {
+  Card,
+  CardContent,
+  Typography,
+  Divider,
+  Button,
+  Paper
+} from '@mui/material'
 import separateWords from '../lib/separate-words'
 import AddIcon from '@mui/icons-material/Add'
 
@@ -14,10 +21,12 @@ function ProjectsList({ userInfo }) {
       ))
     } else if (typeof value === 'object') {
       return Object.entries(value).map(([subKey, subVal]) => (
-        subKey !== 'id' && subKey !== 'tasks' && ( // TODO: i will render tasks in a different component
+        subKey !== 'id' && subKey !== 'tasks' && (
+        // TODO: i will render tasks in a different component
           <Typography key={subKey}>
             <strong>
-              {`${separateWords(subKey.charAt(0).toUpperCase() + subKey.slice(1))}: `}
+              {`${separateWords(subKey.charAt(0).toUpperCase() +
+                subKey.slice(1))}: `}
             </strong>
             {renderValue(subKey, subVal)}
           </Typography>
@@ -32,14 +41,42 @@ function ProjectsList({ userInfo }) {
     return Object.entries(userInfo.projects).map(([key, value]) => (
       <Typography key={key}>
         {renderValue(key, value)}
-        <div style={{ display: 'flex', justifyContent: 'center' }}> {/* it must be two buttons on the same line */}
-          <Button variant='contained' style={{ marginTop: '6px', textTransform: 'none', backgroundColor: 'orange' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center'
+          }}
+        >
+          <Button
+            variant='contained'
+            style={{
+              marginTop: '6px',
+              textTransform: 'none',
+              backgroundColor: 'orange'
+            }}
+          >
             Edit
           </Button>
-          <Button variant='contained' style={{ marginTop: '6px', textTransform: 'none', backgroundColor: 'red', marginLeft: '0.1em' }}>
+          <Button
+            variant='contained'
+            style={{
+              marginTop: '6px',
+              textTransform: 'none',
+              backgroundColor: 'red',
+              marginLeft: '0.1em'
+            }}
+          >
             Delete
           </Button>
-          <Button variant='contained' color='primary' style={{ marginTop: '6px', textTransform: 'none', marginLeft: '0.1em' }}>
+          <Button
+            variant='contained'
+            color='primary'
+            style={{
+              marginTop: '6px',
+              textTransform: 'none',
+              marginLeft: '0.1em'
+            }}
+          >
             Details
           </Button>
         </div>
@@ -68,9 +105,24 @@ function ProjectsList({ userInfo }) {
         elevation={3}
       >
         <CardContent style={{ padding: '1rem' }}>
-          <Typography component="div" style={{ fontSize: '1.5rem', textAlign: 'center' }}>
+          <Typography
+            component="div"
+            style={{
+              fontSize: '1.5rem',
+              textAlign: 'center'
+            }}
+          >
             Projects List
-            <Button variant='contained' style={{ margin: '1em', textTransform: 'none', backgroundColor: 'green', marginLeft: '0.1em', justifyContent: 'center' }}>
+            <Button
+              variant='contained'
+              style={{
+                margin: '1em',
+                textTransform: 'none',
+                backgroundColor: 'green',
+                marginLeft: '0.1em',
+                justifyContent: 'center'
+              }}
+            >
               <AddIcon fontSize='small' style={{ marginRight: '0.1em' }} />
               New
             </Button>

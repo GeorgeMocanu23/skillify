@@ -21,16 +21,19 @@ function ControlledAccordionTasks() {
     direction: 'asc',
   })
 
-  const handleChange = (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+  const handleChange =
+    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
     setExpanded(isExpanded ? panel : false)
   }
 
   const sortTasks = (key: string) => {
-    const direction = sortConfig.key === key && sortConfig.direction === 'asc' ? 'desc' : 'asc'
+    const direction = sortConfig.key === key &&
+      sortConfig.direction === 'asc' ? 'desc' : 'asc'
     const sorted = [...tasks].sort((a, b) => {
       const aValue = a[key] || ''
       const bValue = b[key] || ''
-      return direction === 'asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue)
+      return direction === 'asc' ?
+        aValue.localeCompare(bValue) : bValue.localeCompare(aValue)
     })
 
     setTasks(sorted)
@@ -41,7 +44,11 @@ function ControlledAccordionTasks() {
     <div style={{ marginTop: '10px' }}>
       <TasksTableHeader sortConfig={sortConfig} onSort={sortTasks} />
       {tasks.map((task) => (
-        <Accordion key={task.id} expanded={expanded === `panel${task.id}`} onChange={handleChange(`panel${task.id}`)}>
+        <Accordion
+          key={task.id}
+          expanded={expanded === `panel${task.id}`}
+          onChange={handleChange(`panel${task.id}`)}
+        >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls={`panel${task.id}bh-content`}

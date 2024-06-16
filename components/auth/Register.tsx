@@ -51,7 +51,13 @@ function Register() {
         }}
         elevation={4}
       >
-        <Typography variant="h4" align='center' style={{ marginBottom: '10px' }}>
+        <Typography
+          variant="h4"
+          align='center'
+          style={{
+            marginBottom: '10px'
+          }}
+        >
           Register
         </Typography>
         <TextField
@@ -111,7 +117,15 @@ function Register() {
           onChange={(e) => setSamePassword(e.target.value)}
           style={{ marginBottom: '8px', width: '100%' }}
         />
-        {error && <Typography style={{ color: 'red', marginBottom: '8px' }}>{error}</Typography>}
+        {error &&
+          <Typography
+            style={{
+              color: 'red',
+              marginBottom: '8px'
+            }}
+          >
+            {error}
+          </Typography>}
         <Button
           variant="contained"
           disabled={loading}

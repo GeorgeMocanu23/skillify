@@ -1,5 +1,12 @@
 ﻿import React, { useState, useEffect } from 'react'
-import { Box, Typography, Button, CardContent, Card, useMediaQuery } from '@mui/material'
+import {
+  Box,
+  Typography,
+  Button,
+  CardContent,
+  Card,
+  useMediaQuery
+} from '@mui/material'
 
 import { tasksItems } from '../data/tasksItems'
 
@@ -44,7 +51,10 @@ function TasksList() {
             {tasks.map((tasks) => (
               <div key={tasks.id}>
                 <Button
-                  color={tasks.status === 'Completed' ? 'success' : tasks.status === 'Overdue' ? 'error' : 'warning'}
+                  color={
+                    tasks.status === 'Completed' ? 'success' :
+                      tasks.status === 'Overdue' ? 'error' : 'warning'
+                  }
                   style={{
                     textTransform: 'none',
                   }}
