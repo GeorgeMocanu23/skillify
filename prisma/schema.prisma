@@ -1,0 +1,281 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model users {
+  id               Int              @id @default(autoincrement())
+  firstName        String
+  lastName         String
+  username         String           @unique
+  password         String
+  email            String           @unique
+  avatar           String?
+  activated        Boolean          @default(false)
+  role             Role             @default(USER)
+  location         String?
+  phoneNo          String?
+  website          String?
+  occupation       String?
+  company          String?
+  bio              String?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  lastOnline       DateTime         @default(now())
+  interests        String[]
+  socialsMedia     socialMedia[]
+  workExperiences  workExperience[]
+  educations       education[]
+  tehnicSkills     tehnicSkill[]
+  nonTehnicSkills  nonTehnicSkill[]
+  languages        language[]
+  projects         project[]
+  tasks            task[]
+  posts            post[]
+  comments         comment[]
+  likes            like[]
+  followers        follower[]       @relation("UserFollowers")
+  following        follower[]       @relation("FollowerUsers")
+  notifications    notification[]
+  sentMessages     message[]        @relation("sentMessages")
+  receivedMessages message[]        @relation("receivedMessages")
+  activityStatus   activityStatus[]
+  rewards          reward[]
+  friends          friendship[]     @relation("UserFriendships")
+  friendships      friendship[]     @relation("FriendUserhips")
+  blockedUsers     blockedUser[]    @relation("BlockingUser")
+  blockedBy        blockedUser[]    @relation("BlockedUser")
+  reports          report[]         @relation("reports")
+  reportedReports  report[]         @relation("ReportedUser")
+  reportedUsers    report[]         @relation("Reporter")
+}
+
+model socialMedia {
+  id      Int     @id @default(autoincrement())
+  name    String
+  link    String
+  user    users   @relation(fields: [userId], references: [id])
+  userId  Int
+}
+
+model workExperience {
+  id          Int      @id @default(autoincrement())
+  title       String
+  company     String
+  location    String
+  startDate   DateTime
+  endDate     DateTime
+  description String
+  user        users     @relation(fields: [userId], references: [id])
+  userId      Int
+}
+
+model education {
+  id          Int      @id @default(autoincrement())
+  school      String
+  degree      String
+  field       String
+  startDate   DateTime
+  endDate     DateTime
+  description String
+  user        users     @relation(fields: [userId], references: [id])
+  userId      Int
+}
+
+model tehnicSkill {
+  id          Int     @id @default(autoincrement())
+  name        String
+  level       Level
+  user        users   @relation(fields: [userId], references: [id])
+  userId      Int
+}
+
+model nonTehnicSkill {
+  id          Int     @id @default(autoincrement())
+  name        String
+  level       Level
+  user        users   @relation(fields: [userId], references: [id])
+  userId      Int
+}
+
+model language {
+  id          Int     @id @default(autoincrement())
+  name        String
+  level       Level
+  user        users   @relation(fields: [userId], references: [id])
+  userId      Int
+}
+
+model project {
+  id          Int         @id @default(autoincrement())
+  title       String
+  description String
+  status      Status
+  startDate   DateTime
+  endDate     DateTime
+  priority    Priority
+  importance  Importance
+  user        users       @relation(fields: [userId], references: [id])
+  userId      Int
+}
+
+model task {
+  id          Int         @id @default(autoincrement())
+  title       String
+  description String
+  status      Status
+  startDate   DateTime
+  endDate     DateTime
+  priority    Priority
+  importance  Importance
+  user        users       @relation(fields: [userId], references: [id])
+  userId      Int
+}
+
+model post {
+  id          Int         @id @default(autoincrement())
+  title       String
+  content     String
+  status      String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  user        users       @relation(fields: [userId], references: [id])
+  userId      Int
+  comments    comment[]
+  likes       like[]
+}
+
+model comment {
+  id          Int      @id @default(autoincrement())
+  content     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        users     @relation(fields: [userId], references: [id])
+  userId      Int
+  post        post     @relation(fields: [postId], references: [id])
+  postId      Int
+}
+
+model like {
+  id          Int      @id @default(autoincrement())
+  user        users     @relation(fields: [userId], references: [id])
+  userId      Int
+  post        post     @relation(fields: [postId], references: [id])
+  postId      Int
+}
+
+model follower {
+	id          Int       @id @default(autoincrement())
+	user        users     @relation("UserFollowers", fields: [userId], references: [id])
+	userId      Int
+	follower    users     @relation("FollowerUsers", fields: [followerId], references: [id])
+	followerId  Int
+}
+
+model notification {
+  id          Int       @id @default(autoincrement())
+  content     String
+  status      String
+  createdAt   DateTime  @default(now())
+  user        users     @relation(fields: [userId], references: [id])
+  userId      Int
+}
+
+model message {
+  id          Int       @id @default(autoincrement())
+  content     String
+  status      MessageStatus
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  receiver    users     @relation(name: "receivedMessages", fields: [receiverId], references: [id])
+  receiverId  Int
+  sender      users     @relation(name: "sentMessages", fields: [senderId], references: [id])
+  senderId    Int
+}
+
+model activityStatus {
+  id                 Int       @id @default(autoincrement())
+  projects           Int       @default(0)
+  inProgressProjects Int       @default(0)
+  completedProjects  Int       @default(0)
+  overdueProjects    Int       @default(0)
+  tasks              Int       @default(0)
+  inProgressTasks    Int       @default(0)
+  completedTasks     Int       @default(0)
+  overdueTasks       Int       @default(0)
+  user               users     @relation(fields: [userId], references: [id])
+  userId             Int       @unique
+}
+
+model reward {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String
+  points      Int
+  user        users     @relation(fields: [userId], references: [id])
+  userId      Int
+}
+
+model friendship {
+  id          Int     @id @default(autoincrement())
+  user        users   @relation("UserFriendships", fields: [userId], references: [id])
+  userId      Int
+  friend      users   @relation("FriendUserhips", fields: [friendId], references: [id])
+  friendId    Int
+}
+
+model blockedUser {
+  id              Int     @id @default(autoincrement())
+  user            users   @relation(name: "BlockingUser", fields: [userId], references: [id])
+  userId          Int
+  blockedUser     users   @relation(name: "BlockedUser", fields: [blockedUserId], references: [id])
+  blockedUserId   Int
+}
+
+model report {
+  id             Int      @id @default(autoincrement())
+  content        String
+  status         String
+  user           users    @relation(name: "Reporter", fields: [userId], references: [id])
+  userId         Int
+  reportedUser   users    @relation(name: "ReportedUser", fields: [reportedUserId], references: [id])
+  reportedUserId Int
+  reporters      users[]  @relation("reports")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Status {
+  IN_PROGRESS
+  COMPLETED
+  OVERDUE
+}
+
+enum Priority {
+  URGENT
+  NOT_URGENT
+}
+
+enum Importance {
+  YES
+  NO
+}
+
+enum Level {
+  BASIC
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum MessageStatus {
+  READ
+  UNREAD
+}
