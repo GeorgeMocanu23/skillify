@@ -19,7 +19,10 @@ function Topbar({ tasksItems }) {
             InputProps={{
               ...params.InputProps,
               type: 'search',
-              style: { borderRadius: '15px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }
+              style: {
+                borderRadius: '15px',
+                boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'
+              }
             }}
           />
         )}

@@ -26,22 +26,46 @@ const [isModalDeleteOpen, setModalDeleteOpen] = useState(false)
       <Typography
         sx={{
           color:
-            (new Date(dueDate).getTime() - new Date().getTime()) / (2 * 24 * 60 * 60 * 1000) <= 1 && status === 'In Progress' || status === 'Overdue' ? 'red' :
-              (new Date(dueDate).getTime() - new Date().getTime()) / (4 * 24 * 60 * 60 * 1000) <= 1 && status === 'In Progress' ? 'orange' :
-                'green',
+            (new Date(dueDate).getTime() - new Date().getTime()) /
+              (2 * 24 * 60 * 60 * 1000) <= 1 &&
+              status === 'In Progress' || status === 'Overdue' ? 'red' :
+              (new Date(dueDate).getTime() - new Date().getTime()) /
+                (4 * 24 * 60 * 60 * 1000) <= 1 &&
+                status === 'In Progress' ? 'orange' : 'green',
         }}
       >
         {`Start Date: ${startDate}`}
         <br />
         {`Due Date: ${dueDate}`}
       </Typography>
-      {/* Adaugă și alte informații relevante despre task */}
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button variant="outlined" color="primary" onClick={handleOpenModalEdit} style={{ textTransform: 'none', marginRight: '10px' }}>
+      {/* Add other relevant information about the task */}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'flex-end'
+        }}
+      >
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={handleOpenModalEdit}
+          style={{
+            textTransform: 'none',
+            marginRight: '10px'
+          }}
+        >
           Edit Task
           <ModeEditIcon style={{ fontSize: '20px', marginLeft: '5px' }} />
         </Button>
-        <Button variant="outlined" color="error" onClick={handleOpenModalDelete} style={{ textTransform: 'none', marginRight: '10px' }}>
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={handleOpenModalDelete}
+          style={{
+            textTransform: 'none',
+            marginRight: '10px'
+          }}
+        >
           Delete Task
           <DeleteOutlineIcon style={{ fontSize: '20px', marginLeft: '5px' }} />
         </Button>

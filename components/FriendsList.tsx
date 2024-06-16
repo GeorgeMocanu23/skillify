@@ -17,8 +17,23 @@ function FriendsList({ userInfo }) {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'left', margin: '10px' }}>
-      <Typography variant='h4' style={{ display: 'flex', justifyContent: 'center' }}>Friends List</Typography>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'left',
+        margin: '10px'
+      }}
+    >
+      <Typography
+        variant='h4'
+        style={{
+          display: 'flex',
+          justifyContent: 'center'
+        }}
+      >
+        Friends List
+      </Typography>
       {friends.map((friend) => (
         <Button
           key={friend.id}
@@ -33,8 +48,19 @@ function FriendsList({ userInfo }) {
             textTransform: 'none',
           }}
         >
-          <div key={friend.id} style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
-            <Avatar src={friend.avatar} alt={friend.name} style={{ marginRight: '7px' }} />
+          <div
+            key={friend.id}
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+              alignItems: 'center'
+            }}
+          >
+            <Avatar
+              src={friend.avatar}
+              alt={friend.name}
+              style={{ marginRight: '7px' }}
+            />
             <p style={{ margin: 0 }}>{friend.name}</p>
           </div>
         </Button>

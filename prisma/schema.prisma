@@ -170,11 +170,11 @@ model like {
 }
 
 model follower {
-	id          Int       @id @default(autoincrement())
-	user        users     @relation("UserFollowers", fields: [userId], references: [id])
-	userId      Int
-	follower    users     @relation("FollowerUsers", fields: [followerId], references: [id])
-	followerId  Int
+  id          Int       @id @default(autoincrement())
+  user        users     @relation("UserFollowers", fields: [userId], references: [id])
+  userId      Int
+  follower    users     @relation("FollowerUsers", fields: [followerId], references: [id])
+  followerId  Int
 }
 
 model notification {

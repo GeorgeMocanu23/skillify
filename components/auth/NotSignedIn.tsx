@@ -16,10 +16,22 @@ function NotSignedIn() {
         }}
         elevation={4}
       >
-        <Typography variant="h4" align='center' style={{ marginBottom: '10px' }}>
+        <Typography
+          variant="h4"
+          align='center'
+          style={{
+            marginBottom: '10px'
+          }}
+        >
           You are not signed in
         </Typography>
-        <Typography variant="body1" align='center' style={{ marginBottom: '10px' }}>
+        <Typography
+          variant="body1"
+          align='center'
+          style={{
+            marginBottom: '10px'
+          }}
+        >
           Please login to access the dashboard
         </Typography>
         <Button
@@ -32,7 +44,13 @@ function NotSignedIn() {
         >
           Sign in
         </Button>
-        <Typography variant="body1" align='center' style={{ marginTop: '10px' }}>
+        <Typography
+          variant="body1"
+          align='center'
+          style={{
+            marginTop: '10px'
+          }}
+        >
           Don't have an account?
         </Typography>
         <Button

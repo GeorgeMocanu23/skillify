@@ -1,5 +1,11 @@
 import React, { useState } from 'react'
-import { Card, Typography, useMediaQuery, Button, Divider } from '@mui/material'
+import {
+  Card,
+  Typography,
+  useMediaQuery,
+  Button,
+  Divider
+} from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import EditUserModal from '../helper/EditUserModal'
 import separateWords from '../lib/separate-words'
@@ -68,7 +74,14 @@ function PersonalData({ userInfo }) {
           margin: '1rem',
         }}
       >
-        <Typography variant='h4' style={{ marginBottom: '1rem' }}>Personal Data</Typography>
+        <Typography
+          variant='h4'
+          style={{
+            marginBottom: '1rem'
+          }}
+        >
+          Personal Data
+        </Typography>
         {renderUserInfo()}
         <Button
           variant='outlined'

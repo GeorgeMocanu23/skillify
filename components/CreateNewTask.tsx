@@ -15,7 +15,13 @@ function CreateNewTask() {
   }
 
   return (
-    <div style={{ marginTop: '7px', display: 'flex', justifyContent: 'center' }}>
+    <div
+      style={{
+        marginTop: '7px',
+        display: 'flex',
+        justifyContent: 'center'
+      }}
+    >
       <Button
         variant="outlined"
         color="success"
@@ -23,13 +29,32 @@ function CreateNewTask() {
         onClick={handleOpenModal}
       >
         Add a new task
-        <AddCircleOutlineIcon style={{ fontSize: '20px', marginLeft: '5px' }} />
+        <AddCircleOutlineIcon
+          style={{
+            fontSize: '20px',
+            marginLeft: '5px'
+          }}
+        />
       </Button>
-      {/*<Button variant="outlined" color="primary" style={{ textTransform: 'none', marginRight: '10px' }}>
-        Edit Task
+      {/*<Button 
+          variant="outlined" 
+          color="primary" 
+          style={{ 
+            textTransform: 'none', 
+            marginRight: '10px' 
+          }}
+        >
+          Edit Task
         <ModeEditIcon style={{ fontSize: '20px', marginLeft: '5px' }} />
       </Button>
-      <Button variant="outlined" color="error" style={{ textTransform: 'none', marginRight: '10px' }}>
+      <Button 
+        variant="outlined" 
+        color="error" 
+        style={{ 
+          textTransform: 'none', 
+          marginRight: '10px' 
+        }}
+      >
         Delete Task
         <DeleteOutlineIcon style={{ fontSize: '20px', marginLeft: '5px' }} />
       </Button>*/}

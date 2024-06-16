@@ -17,7 +17,12 @@ function DeleteUserModal({ open, handleClose, taskItems }) {
         <Typography>{taskItems.title}</Typography>
       </DialogContent>
       <DialogActions>
-        <DialogButton color='primary' onClick={handleClose}>Cancel</DialogButton>
+        <DialogButton
+          color='primary'
+          onClick={handleClose}
+        >
+          Cancel
+        </DialogButton>
         <DialogButton color='error' onClick={handleClose}>Delete</DialogButton>
       </DialogActions>
     </Dialog>

@@ -1,12 +1,21 @@
 ﻿import React from 'react'
-import CircularProgress, { CircularProgressProps } from '@mui/material/CircularProgress'
+import CircularProgress, {
+  CircularProgressProps
+} from '@mui/material/CircularProgress'
 import { tasksItems } from '../data/tasksItems'
-import { Box, Card, CardContent, useMediaQuery, Typography } from '@mui/material'
+import {
+  Box,
+  Card,
+  CardContent,
+  useMediaQuery,
+  Typography
+} from '@mui/material'
 import styles from '../public/css/global.module.css'
 
 function CircularProgressWithLabel(props: CircularProgressProps & { value: number }) {
   const isSmallScreen = useMediaQuery('(max-width:600px)')
-  const completedTasksList = tasksItems.filter((task) => task.status === 'Completed')
+  const completedTasksList =
+    tasksItems.filter((task) => task.status === 'Completed')
   const tasksCompleted = completedTasksList.length
 
   return (
@@ -23,7 +32,13 @@ function CircularProgressWithLabel(props: CircularProgressProps & { value: numbe
         elevation={3}
       >
         <CardContent>
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}
+          >
             <Box sx={{ position: 'relative', display: 'inline-flex' }}>
               <CircularProgress
                 style={{ color: 'green' }}
@@ -59,7 +74,9 @@ function CircularProgressWithLabel(props: CircularProgressProps & { value: numbe
               </Box>
             </Box>
             <Box style={{ margin: '5px', textAlign: 'center' }}>
-              <Typography>{tasksCompleted} / {tasksItems.length} tasks</Typography>
+              <Typography>
+                {tasksCompleted} / {tasksItems.length} tasks
+              </Typography>
             </Box>
           </Box>
         </CardContent >

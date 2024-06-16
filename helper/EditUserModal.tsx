@@ -29,16 +29,20 @@ function EditUserModal({ open, handleClose, userData }) {
     if (Array.isArray(value)) {
       return (
         <div key={key}>
-          <strong>{separateWords(key.charAt(0).toUpperCase() + key.slice(1))}:</strong>
+          <strong>
+            {separateWords(key.charAt(0).toUpperCase() + key.slice(1))}:
+          </strong>
           {value.map((item, index) => {
             if (typeof item === 'object') {
-              // Dacă elementul din array este un obiect, afișează câmpuri pentru fiecare cheie
               return (
                 <div key={index}>
                   {Object.entries(item).map(([nestedKey, nestedValue]) => (
                     <TextField
                       key={nestedKey}
-                      label={`${separateWords(nestedKey.charAt(0).toUpperCase() + nestedKey.slice(1))}`}
+                      label={
+                        `${separateWords(nestedKey.charAt(0).toUpperCase() +
+                          nestedKey.slice(1))}`
+                      }
                       name={`${key}_${index}_${nestedKey}`}
                       value={nestedValue}
                       onChange={handleInputChange}
@@ -49,11 +53,13 @@ function EditUserModal({ open, handleClose, userData }) {
                 </div>
               )
             } else {
-              // Dacă elementul din array nu este un obiect, afișează un câmp de text simplu
               return (
                 <TextField
                   key={index}
-                  label={`${separateWords(key.charAt(0).toUpperCase() + key.slice(1))} ${index + 1}`}
+                  label={
+                    `${separateWords(key.charAt(0).toUpperCase() +
+                      key.slice(1))} ${index + 1}`
+                  }
                   name={`${key}_${index}`}
                   value={item}
                   onChange={handleInputChange}
@@ -74,7 +80,10 @@ function EditUserModal({ open, handleClose, userData }) {
           {Object.entries(value).map(([nestedKey, nestedValue]) => (
             <TextField
               key={nestedKey}
-              label={`${separateWords(nestedKey.charAt(0).toUpperCase() + nestedKey.slice(1))}`}
+              label={
+                `${separateWords(nestedKey.charAt(0).toUpperCase() +
+                  nestedKey.slice(1))}`
+              }
               name={`${key}_${nestedKey}`}
               value={nestedValue}
               onChange={handleInputChange}

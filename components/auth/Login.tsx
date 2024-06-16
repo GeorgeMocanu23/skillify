@@ -41,7 +41,13 @@ export default function Login() {
         }}
         elevation={4}
       >
-        <Typography variant="h4" align='center' style={{ marginBottom: '10px' }}>
+        <Typography
+          variant="h4"
+          align='center'
+          style={{
+            marginBottom: '10px'
+          }}
+        >
           Login
         </Typography>
         <TextField
@@ -59,7 +65,15 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           style={{ marginBottom: '8px', width: '100%' }}
         />
-        {error && <Typography style={{ color: 'red', marginBottom: '8px' }}>{error}</Typography>}
+        {error &&
+          <Typography
+            style={{
+              color: 'red',
+              marginBottom: '8px'
+            }}
+          >
+            {error}
+          </Typography>}
         <Button
           variant="contained"
           onClick={handleSubmit}
