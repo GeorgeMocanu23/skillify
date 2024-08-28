@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+import formatDate from '../../../lib/format-date'
 import prisma from '../../../lib/prisma'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -20,7 +21,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 }
 
 const getProject = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { userId } = req.body
+  const { userId } = req.query
 
   //must check if the logged user is the same as the userId
 
@@ -34,6 +35,7 @@ const getProject = async (req: NextApiRequest, res: NextApiResponse) => {
         endDate: true,
         priority: true,
         importance: true,
+        visibility: true,
         id: true
       },
       where: {
@@ -41,9 +43,15 @@ const getProject = async (req: NextApiRequest, res: NextApiResponse) => {
       }
     })
 
+    const formattedProject = project.map(project => ({
+      ...project,
+      startDate: formatDate(project.startDate),
+      endDate: formatDate(project.endDate)
+    }))
+
     return res.status(200).json({
       success: "Successfully retrieved project!",
-      project: JSON.stringify(project),
+      project: formattedProject
     })
 
   } catch (error) {

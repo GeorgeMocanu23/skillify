@@ -26,10 +26,14 @@ const getFriendship = async (req: NextApiRequest, res: NextApiResponse) => {
     const friendship = await prisma.friendship.findMany({
       select: {
         id: true,
+        userId: true,
         friendId: true
       },
       where: {
-        userId: parseInt(userId)
+        OR: [
+          { userId: parseInt(userId) },
+          { friendId: parseInt(userId) }
+        ]
       }
     })
 

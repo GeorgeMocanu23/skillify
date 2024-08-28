@@ -8,15 +8,41 @@ import {
   useMediaQuery
 } from '@mui/material'
 
-import { tasksItems } from '../data/tasksItems'
+import { useSession } from "next-auth/react"
+
+interface SortConfig {
+  key: string
+  direction: 'asc' | 'desc'
+}
 
 function TasksList() {
-  const [tasks, setTasks] = useState([])
   const isSmallScreen = useMediaQuery('(max-width:600px)')
+  const [tasks, setTasks] = useState([])
+  const [sortConfig, setSortConfig] = useState<SortConfig>({
+    key: '',
+    direction: 'asc',
+  })
+  const { data: session } = useSession()
 
   useEffect(() => {
-    setTasks(tasksItems)
-  }, [])
+    if (session) {
+      fetch(`/api/profile/task?userId=${session.user.id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            setTasks(data.task)
+          } else {
+            console.error(data.error)
+          }
+        })
+        .catch(error => console.error('Error fetching tasks:', error))
+    }
+  }, [session])
 
   return (
     <>
@@ -52,8 +78,8 @@ function TasksList() {
               <div key={tasks.id}>
                 <Button
                   color={
-                    tasks.status === 'Completed' ? 'success' :
-                      tasks.status === 'Overdue' ? 'error' : 'warning'
+                    tasks.status === 'COMPLETED' ? 'success' :
+                      tasks.status === 'OVERDUE' ? 'error' : 'warning'
                   }
                   style={{
                     textTransform: 'none',

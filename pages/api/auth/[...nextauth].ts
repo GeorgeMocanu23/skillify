@@ -1,5 +1,5 @@
-import NextAuth from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials"
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export default NextAuth({
   providers: [
@@ -10,33 +10,26 @@ export default NextAuth({
         username: { label: "Username", type: "text" },
         password: { label: "Password", type: "password" }
       },
-
       async authorize(credentials, req) {
         try {
           const res = await fetch(process.env.SITE_URL + "/api/user/login", {
             method: 'POST',
             body: JSON.stringify(credentials),
             headers: { "Content-Type": "application/json" }
-          })
+          });
 
-          const userResponse = await res.json()
+          const userResponse = await res.json();
 
-          if (res.status === 200) {
-            if (userResponse.user) {
-              const user = JSON.parse(userResponse.user)
-              return Promise.resolve(user)
-            } else {
-              console.error('Username is undefined in the response')
-            }
+          if (res.status === 200 && userResponse.user) {
+            const user = JSON.parse(userResponse.user);
+            return user;
           } else {
-            console.error('Login failed:', userResponse.error)
+            console.error('Login failed:', userResponse.error);
           }
-
-          return Promise.resolve(null)
-
+          return null;
         } catch (error) {
-          console.error('An error occurred during login:', error)
-          return Promise.resolve(null)
+          console.error('An error occurred during login:', error);
+          return null;
         }
       },
     }),
@@ -50,23 +43,21 @@ export default NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token = {
-          ...token,
-          ...user
-        }
+        token.id = user.id;
+        token.username = user.username;
       }
-      return token
+      return token;
     },
 
-    async session({ session, token, user }) {
-      session.user.id = token.id
-      session.user.name = token.username
-      return {
-        ...session,
-        ...token,
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.id = token.id as string;
+        session.user.username = token.username as string;
       }
+      return session;
     }
   },
+
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
@@ -75,4 +66,4 @@ export default NextAuth({
   jwt: {
     secret: process.env.JWT_SECRET,
   },
-})
+});

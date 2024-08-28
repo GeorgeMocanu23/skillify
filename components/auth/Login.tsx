@@ -17,7 +17,9 @@ export default function Login() {
       password,
     })
 
-    if (response.ok) {
+    if (response.error) {
+      setError(response.error)
+    } else if (response.ok) {
       router.push('/')
     } else {
       setError('Invalid username or password')
@@ -26,6 +28,7 @@ export default function Login() {
 
   if (session) {
     router.push('/')
+    return null // Or loading indicator while redirecting
   }
 
   return (
@@ -77,7 +80,7 @@ export default function Login() {
         <Button
           variant="contained"
           onClick={handleSubmit}
-          style={{ textTransform: 'none' }}
+          style={{ textTransform: 'none', marginBottom: '8px' }}
         >
           Login
         </Button>

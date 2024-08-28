@@ -20,7 +20,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 }
 
 const getPost = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { userId } = req.body
+  const { userId } = req.query
+
+  console.log(`Received GET request for userId: ${userId}`);
 
   //must check if the logged user is the same as the userId
 
@@ -35,13 +37,15 @@ const getPost = async (req: NextApiRequest, res: NextApiResponse) => {
         updatedAt: true
       },
       where: {
-        userId: parseInt(userId)
+        userId: parseInt(userId as string)
       }
     })
 
+    console.log(`Fetched posts: ${JSON.stringify(post)}`);
+
     return res.status(200).json({
       success: "Successfully retrieved post!",
-      post: JSON.stringify(post),
+      post
     })
 
   } catch (error) {

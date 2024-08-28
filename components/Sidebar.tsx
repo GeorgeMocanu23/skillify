@@ -28,6 +28,7 @@ function Sidebar({ onSelectOption }) {
 
   const menuItems = [
     { label: 'Dashboard', icon: <DashboardIcon /> },
+    { label: 'Network', icon: <GroupIcon />},
     { label: 'Projects', icon: <DescriptionIcon /> },
     { label: 'My Tasks', icon: <AssignmentIcon /> },
     { label: 'Calendar', icon: <CalendarMonthIcon /> },
@@ -69,8 +70,21 @@ function Sidebar({ onSelectOption }) {
             anchor="left"
             open={isDrawerOpen}
             onClose={() => setIsDrawerOpen(false)}
+            sx={{ display: { xs: 'block', md: 'none' } }}
           >
             <List>
+              <Typography
+                variant="h6"
+                sx={{
+                  p: 1,
+                  textAlign: 'center',
+                  letterSpacing: '.2rem',
+                  fontFamily: 'cursive',
+                  borderBottom: '1px solid #ddd',
+                }}
+              >
+                Skillify
+              </Typography>
               {menuItems.map((item, index) => (
                 <Button
                   key={index}
@@ -116,6 +130,7 @@ function Sidebar({ onSelectOption }) {
                 textAlign: 'center',
                 letterSpacing: '.2rem',
                 fontFamily: 'cursive',
+                borderBottom: '1px solid #ddd',
               }}
             >
               Skillify

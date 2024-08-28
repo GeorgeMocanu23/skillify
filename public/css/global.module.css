@@ -10,3 +10,24 @@
   background-color: #111927;
   background-image: radial-gradient(at 47% 33%, hsl(162.00, 77%, 40%) 0, transparent 59%), radial-gradient(at 82% 65%, hsl(218.00, 39%, 11%) 0, transparent 55%);
 }
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.header {
+  font-size: 32px;
+  color: black;
+  text-align: center;
+  font-family: Verdana, sans-serif;
+}
+
+img {
+  width: 400px;
+  height: 400px;
+  margin: 4px;
+  object-fit: cover;
+}

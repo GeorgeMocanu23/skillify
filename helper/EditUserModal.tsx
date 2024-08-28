@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react'
+﻿import React, { useState, useEffect } from 'react'
 import {
   Dialog,
   DialogTitle,
@@ -9,8 +9,12 @@ import {
 } from '@mui/material'
 import separateWords from '../lib/separate-words'
 
-function EditUserModal({ open, handleClose, userData }) {
-  const [editedData, setEditedData] = useState(userData)
+function EditUserModal({ open, handleClose, taskData, onSave }) {
+  const [editedData, setEditedData] = useState(taskData)
+
+  useEffect(() => {
+    setEditedData(taskData)
+  }, [taskData])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -21,8 +25,8 @@ function EditUserModal({ open, handleClose, userData }) {
   }
 
   const handleSaveChanges = () => {
-    console.log(editedData);
-    handleClose();
+    onSave(editedData)
+    handleClose()
   }
 
   const renderField = (key, value) => {
@@ -110,7 +114,7 @@ function EditUserModal({ open, handleClose, userData }) {
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Edit Your Account Info</DialogTitle>
+      <DialogTitle>Edit Task</DialogTitle>
       <DialogContent>
         {Object.entries(editedData).map(([key, value]) => renderField(key, value))}
       </DialogContent>

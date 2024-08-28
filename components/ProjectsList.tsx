@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import {
   Card,
   CardContent,
@@ -39,7 +39,7 @@ function ProjectsList({ userInfo }) {
 
   const renderUserInfo = () => {
     return Object.entries(userInfo.projects).map(([key, value]) => (
-      <Typography key={key}>
+      <Typography key={key} component="div">
         {renderValue(key, value)}
         <div
           style={{

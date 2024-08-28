@@ -120,6 +120,7 @@ model project {
   endDate     DateTime
   priority    Priority
   importance  Importance
+  visibility  Visibility  @default(PUBLIC)
   user        users       @relation(fields: [userId], references: [id])
   userId      Int
 }
@@ -133,6 +134,7 @@ model task {
   endDate     DateTime
   priority    Priority
   importance  Importance
+  visibility  Visibility  @default(PUBLIC)
   user        users       @relation(fields: [userId], references: [id])
   userId      Int
 }
@@ -278,4 +280,9 @@ enum Level {
 enum MessageStatus {
   READ
   UNREAD
+}
+
+enum Visibility {
+  PUBLIC
+  PRIVATE
 }

@@ -1,7 +1,6 @@
 ﻿import React from 'react'
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
-import { tasksItems } from '../data/tasksItems'
 
 function Topbar({ tasksItems }) {
 
@@ -11,7 +10,7 @@ function Topbar({ tasksItems }) {
         freeSolo
         id="free-solo-2-demo"
         disableClearable
-        options={tasksItems.map((option) => option.description)}
+        options={tasksItems.map((option) => option.title)}
         renderInput={(params) => (
           <TextField
             {...params}

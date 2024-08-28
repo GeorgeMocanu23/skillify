@@ -1,6 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-
+﻿import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../../lib/prisma'
+import { getSession } from 'next-auth/react'
+import formatDate from '../../../lib/format-date'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req
@@ -20,12 +21,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 }
 
 const getTask = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { userId } = req.body
-
-  //must check if the logged user is the same as the userId
+  const { userId } = req.query
 
   try {
-    const task = await prisma.task.findMany({
+    const tasks = await prisma.task.findMany({
       select: {
         id: true,
         title: true,
@@ -34,16 +33,24 @@ const getTask = async (req: NextApiRequest, res: NextApiResponse) => {
         startDate: true,
         endDate: true,
         priority: true,
-        importance: true
+        importance: true,
+        visibility: true,
+        userId: true
       },
       where: {
-        userId: parseInt(userId)
+        userId: parseInt(userId as string)
       }
     })
 
+    const formattedTasks = tasks.map(task => ({
+      ...task,
+      startDate: formatDate(task.startDate),
+      endDate: formatDate(task.endDate)
+    }))
+
     return res.status(200).json({
       success: "Successfully retrieved task!",
-      task: JSON.stringify(task),
+      task: formattedTasks
     })
 
   } catch (error) {
@@ -54,8 +61,6 @@ const getTask = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const addTask = async (req: NextApiRequest, res: NextApiResponse) => {
   const { title, description, status, startDate, endDate, priority, importance, userId } = req.body
-
-  //must check if the logged user is the same as the userId
 
   const convertToISO8601 = (date: string) => {
     const [day, month, year] = date.split('.')
