@@ -38,3 +38,5 @@ node_modules
 /.next/
 .vercel
 .vs/
+# Local Netlify folder
+.netlify
