@@ -7,7 +7,7 @@ function InfiniteScroll() {
   const [renderedContext, setRenderedContext] = useState('task');
   const [elements, setElements] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const observerRef = useRef();
+  const observerRef = useRef<IntersectionObserver | null>(null);
   const [randomUserIds, setRandomUserIds] = useState([]);
   const { data: session } = useSession();
   const userId = session?.user?.id;
@@ -59,8 +59,9 @@ function InfiniteScroll() {
       threshold: 0.1,
     });
 
-    if (document.getElementById('scroll-marker')) {
-      observer.observe(document.getElementById('scroll-marker'));
+    const marker = document.getElementById('scroll-marker');
+    if (marker) {
+      observer.observe(marker);
     }
 
     observerRef.current = observer;
