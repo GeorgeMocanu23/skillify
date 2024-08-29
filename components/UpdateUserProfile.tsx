@@ -96,7 +96,8 @@ function UpdateUserProfile({ userInfo }) {
       <EditUserModal
         open={isModalOpen}
         handleClose={handleCloseModal}
-        userData={userInfo}
+        taskData={userInfo}
+        onSave={handleCloseModal}
       />
     </>
   )

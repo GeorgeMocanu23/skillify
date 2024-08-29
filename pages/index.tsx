@@ -79,7 +79,7 @@ function HomePage() {
               flexGrow: 1,
             }}
           >
-            <CreateNewItem />
+            <CreateNewItem type="task" />
             <ControlledAccordionTasks type="task" />
           </Box>
         );

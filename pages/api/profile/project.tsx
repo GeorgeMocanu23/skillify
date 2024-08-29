@@ -39,14 +39,14 @@ const getProject = async (req: NextApiRequest, res: NextApiResponse) => {
         id: true
       },
       where: {
-        userId: parseInt(userId)
+        userId: parseInt(userId as string)
       }
     })
 
     const formattedProject = project.map(project => ({
       ...project,
-      startDate: formatDate(project.startDate),
-      endDate: formatDate(project.endDate)
+      startDate: formatDate(project.startDate).toString(),
+      endDate: formatDate(project.endDate).toString()
     }))
 
     return res.status(200).json({
