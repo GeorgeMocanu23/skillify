@@ -1,14 +1,17 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 
-let prisma: PrismaClient
+const isProduction = process.env.NODE_ENV === 'production';
 
-if (process.env.NODE_ENV === 'production') {
-  prisma = new PrismaClient()
+let prisma: PrismaClient;
+
+if (isProduction) {
+  const { default: prodPrisma } = require('./prismaClient');
+  prisma = prodPrisma;
 } else {
   if (!global.prisma) {
-    global.prisma = new PrismaClient()
+    global.prisma = new PrismaClient();
   }
-  prisma = global.prisma
+  prisma = global.prisma;
 }
 
-export default prisma
+export default prisma;
