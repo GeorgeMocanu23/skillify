@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "prisma-generate": "prisma generate"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +21,7 @@
     "@mui/x-date-pickers": "^6.18.1",
     "@neondatabase/serverless": "^0.9.5",
     "@prisma/adapter-neon": "^5.19.1",
-    "@prisma/client": "^5.15.0",
+    "@prisma/client": "^5.19.1",
     "bcrypt": "^5.1.1",
     "dayjs": "^1.11.10",
     "dotenv": "^16.4.5",
@@ -40,6 +41,6 @@
     "@types/node": "20.9.1",
     "@types/react": "18.2.37",
     "@types/ws": "^8.5.12",
-    "prisma": "^5.12.1"
+    "prisma": "^5.19.1"
   }
 }
