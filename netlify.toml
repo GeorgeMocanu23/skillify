@@ -1,8 +1,8 @@
 [build]
-  command = "npm run build"
-  publish = ".next"
+command = "npm run build && npx prisma generate && npx prisma migrate deploy"
+publish = ".next"
 
 [build.cache]
-  paths = [
-    ".next/cache/**/*"
-  ]
+paths = [
+  ".next/cache/**/*"
+]
